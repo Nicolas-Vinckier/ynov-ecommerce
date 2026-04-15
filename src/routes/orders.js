@@ -54,3 +54,4 @@ router.patch('/:id/status', (req, res) => {
 module.exports = router;
 // order search stub
 // wip order filter
+// handle error cases
