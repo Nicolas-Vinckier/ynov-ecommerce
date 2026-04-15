@@ -52,3 +52,4 @@ router.post('/', (req, res) => {
 module.exports = router;
 // product search stub
 // wip search logic
+// fixed typo in search
