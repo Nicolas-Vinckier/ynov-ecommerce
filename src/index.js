@@ -25,16 +25,21 @@ app.use((req, res) => {
   res.status(404).json({ error: "Route not found" });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-  console.log("-".repeat(50));
-  console.log("Features flags:", {
-    ...Object.keys(process.env)
-      .filter((key) => key.startsWith("FEATURE_"))
-      .reduce((acc, key) => {
-        acc[key] = process.env[key];
+// Start server if run directly
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log("-".repeat(50));
+    console.log("Features flags:", {
+      ...Object.keys(process.env)
+        .filter((key) => key.startsWith("FEATURE_"))
+        .reduce((acc, key) => {
+          acc[key] = process.env[key];
 
-        return acc;
-      }, {}),
+          return acc;
+        }, {}),
+    });
   });
-});
+}
+
+module.exports = app;
