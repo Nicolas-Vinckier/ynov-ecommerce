@@ -27,4 +27,13 @@ app.use((req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
+  console.log("-".repeat(50));
+  console.log("Features flags:", {
+    ...Object.keys(process.env)
+      .filter((key) => key.startsWith("FEATURE_"))
+      .reduce((acc, key) => {
+        acc[key] = process.env[key];
+        return acc;
+      }, {}),
+  });
 });
