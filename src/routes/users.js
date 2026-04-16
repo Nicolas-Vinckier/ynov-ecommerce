@@ -11,8 +11,10 @@ function getUsersV1() {
 function getUsersV2() {
   const data = users.reduce((acc, user) => {
     acc[user.email] = user;
+
     return acc;
   }, {});
+
   return {
     version: "v2",
     users: data,

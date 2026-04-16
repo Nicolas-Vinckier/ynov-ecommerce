@@ -33,6 +33,7 @@ app.listen(PORT, () => {
       .filter((key) => key.startsWith("FEATURE_"))
       .reduce((acc, key) => {
         acc[key] = process.env[key];
+
         return acc;
       }, {}),
   });
