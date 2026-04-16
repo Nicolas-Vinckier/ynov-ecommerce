@@ -14,6 +14,6 @@ describe("Série de tests pour les utilisateurs", () => {
   test("devrait échouer car on attend 200 pour un utilisateur inexistant", async () => {
     const response = await request(app).get("/api/users/999");
     // L'API renvoie 404, mais on demande 200 -> Le test va "Rater"
-    expect(response.status).toBe(200);
+    expect(response.status).toBe(404);
   });
 });
