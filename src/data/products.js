@@ -1,7 +1,7 @@
 const products = [
   {
     id: 1,
-    name: 'Laptop Pro 15"',
+    name: "Laptop Pro 15",
     price: 1299.99,
     stock: 12,
     category: "electronics",

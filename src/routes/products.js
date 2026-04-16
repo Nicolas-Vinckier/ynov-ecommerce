@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const products = require("../data/products");
-
 const FEATURE_V2_PRODUCTS = process.env.FEATURE_V2_PRODUCTS === "true";
 
 function getProductsV1() {
