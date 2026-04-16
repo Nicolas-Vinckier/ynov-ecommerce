@@ -2,9 +2,27 @@ const express = require("express");
 const router = express.Router();
 const users = require("../data/users");
 
+const FEATURE_V2_USERS = process.env.FEATURE_V2_USERS === "true";
+
+function getUsersV1() {
+  return users;
+}
+
+function getUsersV2() {
+  const data = users.reduce((acc, user) => {
+    acc[user.email] = user;
+    return acc;
+  }, {});
+  return {
+    version: "v2",
+    users: data,
+  };
+}
+
 // GET /api/users
 router.get("/", (req, res) => {
-  res.json(users);
+  const data = FEATURE_V2_USERS ? getUsersV2() : getUsersV1();
+  res.json(data);
 });
 
 // GET /api/users/:id
