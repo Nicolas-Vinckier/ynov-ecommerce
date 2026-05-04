@@ -7,7 +7,7 @@
     "start": "node src/index.js",
     "dev": "node --watch src/index.js",
     "lint": "eslint src/",
-    "test": "jest --runInBand --bail",
+    "test": "jest --runInBand --bail --forceExit",
     "prepare": "husky",
     "seed": "node src/db/seed.js"
   },

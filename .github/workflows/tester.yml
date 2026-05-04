@@ -25,3 +25,7 @@ jobs:
 
       - name: Run tests
         run: npm test
+
+      - name: Wait to reach 1 minute on success
+        if: success()
+        run: sleep 45
