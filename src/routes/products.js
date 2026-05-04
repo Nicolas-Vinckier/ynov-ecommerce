@@ -111,7 +111,7 @@ router.get("/", (req, res) => {
 // GET /api/products/:id
 router.get("/:id", (req, res) => {
   const id = Number.parseInt(req.params.id);
-  if (isNaN(id)) {
+  if (Number.isNaN(id)) {
     return res.status(400).json({ error: "Product id must be a number" });
   }
   db.get("SELECT * FROM products WHERE id = ?", [id], (err, row) => {
