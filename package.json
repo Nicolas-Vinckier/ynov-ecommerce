@@ -8,6 +8,7 @@
     "dev": "node --watch src/index.js",
     "lint": "eslint src/",
     "test": "jest --runInBand --bail --forceExit",
+    "coverage": "jest --runInBand --coverage",
     "prepare": "husky",
     "seed": "node src/db/seed.js"
   },
@@ -30,5 +31,27 @@
     "husky": "^9.0.0",
     "jest": "^30.3.0",
     "supertest": "^7.2.2"
+  },
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "statements": 65,
+        "branches": 50,
+        "functions": 0,
+        "lines": 65
+      },
+      "./src/routes/*.js": {
+        "statements": 100,
+        "branches": 95,
+        "functions": 100,
+        "lines": 100
+      },
+      "./src/db/*.js": {
+        "statements": 60,
+        "branches": 30,
+        "functions": 50,
+        "lines": 60
+      }
+    }
   }
 }

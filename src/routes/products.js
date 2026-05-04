@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../db/index");
-const FEATURE_V2_PRODUCTS = process.env.FEATURE_V2_PRODUCTS === "true";
 
 /**
  * @swagger
@@ -74,11 +73,12 @@ function formatProductsV2(products) {
  */
 // GET /api/products
 router.get("/", (req, res) => {
+  const isV2 = process.env.FEATURE_V2_PRODUCTS === "true";
   db.all("SELECT * FROM products", [], (err, rows) => {
     if (err) {
       return res.status(500).json({ error: err.message });
     }
-    const data = FEATURE_V2_PRODUCTS ? formatProductsV2(rows) : rows;
+    const data = isV2 ? formatProductsV2(rows) : rows;
     res.json(data);
   });
 });
@@ -164,7 +164,7 @@ router.post("/", (req, res) => {
     res.status(201).json({
       id: this.lastID,
       name,
-      description,
+      description: description || "",
       price,
       stock: stock ?? 0
     });

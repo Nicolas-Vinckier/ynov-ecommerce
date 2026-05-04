@@ -34,7 +34,7 @@ const db = require("../db/index");
  *   description: The users managing API
  */
 
-const FEATURE_V2_USERS = process.env.FEATURE_V2_USERS === "true";
+// Feature flag dynamique pour les tests
 
 // Helper to format users for V2
 function formatUsersV2(users) {
@@ -67,11 +67,12 @@ function formatUsersV2(users) {
  */
 // GET /api/users
 router.get("/", (req, res) => {
+  const isV2 = process.env.FEATURE_V2_USERS === "true";
   db.all("SELECT * FROM users", [], (err, rows) => {
     if (err) {
       return res.status(500).json({ error: err.message });
     }
-    const data = FEATURE_V2_USERS ? formatUsersV2(rows) : rows;
+    const data = isV2 ? formatUsersV2(rows) : rows;
     res.json(data);
   });
 });
