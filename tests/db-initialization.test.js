@@ -3,13 +3,24 @@ const path = require('path');
 const sqlite3 = require('sqlite3');
 
 describe("Tests d'initialisation de la base de données", () => {
-  const tempDbPath = path.resolve(__dirname, '../src/db/database.test.sqlite');
+  let tempDbPath;
 
   beforeEach(() => {
     jest.resetModules();
-    if (fs.existsSync(tempDbPath)) {
-      fs.unlinkSync(tempDbPath);
-    }
+    // On génère un nom unique pour éviter les conflits de verrouillage
+    tempDbPath = path.resolve(__dirname, `../src/db/database.test.${Date.now()}.${Math.random()}.sqlite`);
+  });
+
+  afterAll(() => {
+    // On essaie de nettoyer, mais si c'est verrouillé, on laisse tomber (ce sont des fichiers temp)
+    try {
+      const files = fs.readdirSync(path.resolve(__dirname, '../src/db/'));
+      files.forEach(file => {
+        if (file.startsWith('database.test.') && file.endsWith('.sqlite')) {
+          fs.unlinkSync(path.resolve(__dirname, '../src/db/', file));
+        }
+      });
+    } catch (e) { /* ignore lock errors */ }
   });
 
   test("Devrait déclencher le seed si la base est neuve", (done) => {
@@ -28,7 +39,7 @@ describe("Tests d'initialisation de la base de données", () => {
         expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining("exécution du seed"));
         consoleSpy.mockRestore();
         pathSpy.mockRestore();
-        db.close(done);
+        done();
       } catch (e) {
         pathSpy.mockRestore();
         done(e);
