@@ -26,6 +26,12 @@ jobs:
       - name: Run tests and check coverage
         run: npm run coverage
 
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
       - name: Upload coverage report
         if: always()
         uses: actions/upload-artifact@v4
