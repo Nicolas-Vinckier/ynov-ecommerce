@@ -1,6 +1,11 @@
+# Dépendances
 node_modules/
-.env
 *.log
 dist/
 .DS_Store
+
+# Environment 
+.env
+
+# Base de données
 src/db/database.sqlite

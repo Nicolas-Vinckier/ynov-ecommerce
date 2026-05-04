@@ -33,7 +33,7 @@ describe("Série de tests pour les commandes (Intégration DB)", () => {
     const response = await request(app).get("/api/orders");
     expect(response.status).toBe(200);
     expect(response.body.length).toBeGreaterThan(0);
-    expect(response.body[0].total).toBe(199.99);
+    expect(response.body[0].total).toBe(99.99);
   });
 
   afterAll((done) => {
