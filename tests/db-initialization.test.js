@@ -13,29 +13,24 @@ describe("Tests d'initialisation de la base de données", () => {
   });
 
   test("Devrait déclencher le seed si la base est neuve", (done) => {
-    // On force le chemin vers un fichier temporaire
-    jest.doMock('path', () => {
-      const actualPath = jest.requireActual('path');
-      return {
-        ...actualPath,
-        resolve: (...args) => {
-          if (args[args.length - 1] === 'database.sqlite') return tempDbPath;
-          return actualPath.resolve(...args);
-        }
-      };
+    const originalResolve = path.resolve;
+    const pathSpy = jest.spyOn(path, 'resolve').mockImplementation((...args) => {
+      if (args[args.length - 1] === 'database.sqlite') return tempDbPath;
+      return originalResolve(...args);
     });
 
     const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
     
-    // On charge le module
     const db = require('../src/db/index');
 
     setTimeout(() => {
       try {
         expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining("exécution du seed"));
         consoleSpy.mockRestore();
+        pathSpy.mockRestore();
         db.close(done);
       } catch (e) {
+        pathSpy.mockRestore();
         done(e);
       }
     }, 500);
