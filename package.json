@@ -35,10 +35,10 @@
   "jest": {
     "coverageThreshold": {
       "global": {
-        "statements": 65,
-        "branches": 50,
-        "functions": 0,
-        "lines": 65
+        "statements": 100,
+        "branches": 100,
+        "functions": 100,
+        "lines": 100
       },
       "./src/routes/*.js": {
         "statements": 100,
