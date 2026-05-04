@@ -35,4 +35,4 @@ jobs:
 
       - name: Wait to reach 1 minute on success
         if: success()
-        run: sleep 45
+        run: sleep 1
