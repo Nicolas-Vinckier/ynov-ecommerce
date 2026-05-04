@@ -95,7 +95,7 @@ router.get("/", (req, res) => {
  */
 // GET /api/orders/:id
 router.get("/:id", (req, res) => {
-  const id = parseInt(req.params.id);
+  const id = Number.parseInt(req.params.id);
   db.get("SELECT * FROM orders WHERE id = ?", [id], (err, row) => {
     if (err) {
       return res.status(500).json({ error: err.message });
@@ -203,7 +203,7 @@ router.post("/", (req, res) => {
  */
 // PATCH /api/orders/:id/status
 router.patch("/:id/status", (req, res) => {
-  const id = parseInt(req.params.id);
+  const id = Number.parseInt(req.params.id);
   const { status } = req.body;
   const validStatuses = ["pending", "shipped", "delivered", "cancelled"];
   

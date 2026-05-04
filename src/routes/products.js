@@ -110,7 +110,7 @@ router.get("/", (req, res) => {
  */
 // GET /api/products/:id
 router.get("/:id", (req, res) => {
-  const id = parseInt(req.params.id);
+  const id = Number.parseInt(req.params.id);
   if (isNaN(id)) {
     return res.status(400).json({ error: "Product id must be a number" });
   }

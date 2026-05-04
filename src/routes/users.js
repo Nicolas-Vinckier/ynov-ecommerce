@@ -102,7 +102,7 @@ router.get("/", (req, res) => {
  */
 // GET /api/users/:id
 router.get("/:id", (req, res) => {
-  const id = parseInt(req.params.id);
+  const id = Number.parseInt(req.params.id);
   db.get("SELECT * FROM users WHERE id = ?", [id], (err, row) => {
     if (err) {
       return res.status(500).json({ error: err.message });
