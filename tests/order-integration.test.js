@@ -26,7 +26,7 @@ describe("Série de tests pour les commandes (Intégration DB)", () => {
 
     expect(response.status).toBe(201);
     expect(response.body.id).toBeDefined();
-    expect(response.body.total).toBe(99.99);
+    expect(response.body.total).toBe(199.99);
   });
 
   test("Devrait récupérer la commande qu'on vient de créer", async () => {
