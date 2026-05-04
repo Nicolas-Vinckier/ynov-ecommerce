@@ -38,8 +38,8 @@ describe("Série de tests pour les produits (Intégration DB)", () => {
       price: 5.0,
     });
     expect(response.status).toBe(201);
-    expect(response.body.description).toBe(""); // Valeur par défaut
-    expect(response.body.stock).toBe(0); // Valeur par défaut
+    expect(response.body.description).toBe("");
+    expect(response.body.stock).toBe(0);
   });
 
   test("Devrait échouer à créer un produit avec données manquantes", async () => {
@@ -62,7 +62,7 @@ describe("Série de tests pour les produits (Intégration DB)", () => {
     expect(response.status).toBe(200);
     expect(response.body[0].priceFormatted).toBeDefined();
     expect(response.body[0].available).toBeDefined();
-    process.env.FEATURE_V2_PRODUCTS = "false"; // On remet à l'état initial
+    process.env.FEATURE_V2_PRODUCTS = "false";
   });
 
   test("Devrait récupérer un produit spécifique par son ID", async () => {

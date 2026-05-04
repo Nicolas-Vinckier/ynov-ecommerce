@@ -46,7 +46,6 @@ describe("Série de tests pour les utilisateurs (Intégration DB)", () => {
   test("Devrait échouer à créer un utilisateur avec données manquantes", async () => {
     const response = await request(app).post("/api/users").send({
       name: "Incomplet"
-      // email manquant
     });
     expect(response.status).toBe(400);
   });
