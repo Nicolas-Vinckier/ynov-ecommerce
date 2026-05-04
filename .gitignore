@@ -7,5 +7,8 @@ dist/
 # Environment 
 .env
 
+# Coverage 
+coverage/
+
 # Base de données
 src/db/database.sqlite
