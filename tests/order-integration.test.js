@@ -6,18 +6,28 @@ describe("Série de tests pour les commandes (Intégration DB)", () => {
   let createdOrderId;
 
   beforeAll((done) => {
-    db.serialize(() => {
-      db.run("DELETE FROM orders");
-      db.run("DELETE FROM users");
-      db.run("DELETE FROM products");
-      db.run(
-        "INSERT INTO users (id, name, email, password) VALUES (1, 'Test User', 'test@test.com', 'pwd')"
-      );
-      db.run(
-        "INSERT INTO products (id, name, description, price, stock) VALUES (1, 'Test Product', 'Test Description', 99.99, 10)",
-        done
-      );
-    });
+    // Sécurité supplémentaire : on attend que la DB soit prête
+    const checkReady = () => {
+      db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='orders'", (err, row) => {
+        if (row) {
+          db.serialize(() => {
+            db.run("DELETE FROM orders");
+            db.run("DELETE FROM users");
+            db.run("DELETE FROM products");
+            db.run(
+              "INSERT INTO users (id, name, email, password) VALUES (1, 'Test User', 'test@test.com', 'pwd')"
+            );
+            db.run(
+              "INSERT INTO products (id, name, description, price, stock) VALUES (1, 'Test Product', 'Test Description', 99.99, 10)",
+              done
+            );
+          });
+        } else {
+          setTimeout(checkReady, 100);
+        }
+      });
+    };
+    checkReady();
   });
 
   test("Devrait créer une commande avec succès", async () => {

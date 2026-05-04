@@ -7,9 +7,18 @@ describe("Série de tests pour les utilisateurs (Intégration DB)", () => {
 
   beforeAll((done) => {
     process.env.FEATURE_V2_USERS = "false";
-    db.serialize(() => {
-      db.run("DELETE FROM users", done);
-    });
+    const checkReady = () => {
+      db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='users'", (err, row) => {
+        if (row) {
+          db.serialize(() => {
+            db.run("DELETE FROM users", done);
+          });
+        } else {
+          setTimeout(checkReady, 100);
+        }
+      });
+    };
+    checkReady();
   });
 
   test("Devrait créer un utilisateur sans mot de passe (mot de passe par défaut)", async () => {

@@ -4,9 +4,18 @@ const db = require("../src/db/index");
 
 describe("Série de tests pour les produits (Intégration DB)", () => {
   beforeAll((done) => {
-    db.serialize(() => {
-      db.run("DELETE FROM products", done);
-    });
+    const checkReady = () => {
+      db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='products'", (err, row) => {
+        if (row) {
+          db.serialize(() => {
+            db.run("DELETE FROM products", done);
+          });
+        } else {
+          setTimeout(checkReady, 100);
+        }
+      });
+    };
+    checkReady();
   });
 
   test("Devrait créer un produit avec succès", async () => {
