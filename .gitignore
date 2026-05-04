@@ -11,4 +11,4 @@ dist/
 coverage/
 
 # Base de données
-src/db/database.sqlite
+*.sqlite
