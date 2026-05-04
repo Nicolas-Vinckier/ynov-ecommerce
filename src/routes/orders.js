@@ -147,10 +147,10 @@ router.post("/", (req, res) => {
       .status(400)
       .json({ error: "userId and total are required" });
   }
-  
+
   const sql = "INSERT INTO orders (user_id, total, status) VALUES (?, ?, ?)";
   const params = [userId, total, "pending"];
-  
+
   db.run(sql, params, function (err) {
     if (err) {
       return res.status(500).json({ error: err.message });
@@ -159,7 +159,7 @@ router.post("/", (req, res) => {
       id: this.lastID,
       userId,
       total,
-      status: "pending"
+      status: "pending",
     });
   });
 });
@@ -206,13 +206,13 @@ router.patch("/:id/status", (req, res) => {
   const id = Number.parseInt(req.params.id);
   const { status } = req.body;
   const validStatuses = ["pending", "shipped", "delivered", "cancelled"];
-  
+
   if (!validStatuses.includes(status)) {
     return res
       .status(400)
       .json({ error: `status must be one of: ${validStatuses.join(", ")}` });
   }
-  
+
   db.run("UPDATE orders SET status = ? WHERE id = ?", [status, id], function (err) {
     if (err) {
       return res.status(500).json({ error: err.message });

@@ -30,7 +30,7 @@ const seedData = (callback) => {
     )`);
 
     console.log("Tables vérifiées/créées avec succès.");
-    if (callback) callback();
+    if (callback) {callback();}
   });
 };
 

@@ -40,6 +40,7 @@ const db = require("../db/index");
 function formatUsersV2(users) {
   const data = users.reduce((acc, user) => {
     acc[user.email] = user;
+
     return acc;
   }, {});
 
@@ -150,10 +151,10 @@ router.post("/", (req, res) => {
   if (!name || !email) {
     return res.status(400).json({ error: "name and email are required" });
   }
-  
+
   const sql = "INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)";
   const params = [name, email, password || "password123", "customer"];
-  
+
   db.run(sql, params, function (err) {
     if (err) {
       return res.status(500).json({ error: err.message });
@@ -162,7 +163,7 @@ router.post("/", (req, res) => {
       id: this.lastID,
       name,
       email,
-      role: "customer"
+      role: "customer",
     });
   });
 });

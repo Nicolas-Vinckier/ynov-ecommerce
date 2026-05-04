@@ -153,10 +153,10 @@ router.post("/", (req, res) => {
   if (!name || price === undefined) {
     return res.status(400).json({ error: "name and price are required" });
   }
-  
+
   const sql = "INSERT INTO products (name, description, price, stock) VALUES (?, ?, ?, ?)";
   const params = [name, description || "", price, stock ?? 0];
-  
+
   db.run(sql, params, function (err) {
     if (err) {
       return res.status(500).json({ error: err.message });
@@ -166,7 +166,7 @@ router.post("/", (req, res) => {
       name,
       description: description || "",
       price,
-      stock: stock ?? 0
+      stock: stock ?? 0,
     });
   });
 });

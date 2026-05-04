@@ -3,7 +3,6 @@ const express = require("express");
 const swaggerUi = require("swagger-ui-express");
 const swaggerJsdoc = require("swagger-jsdoc");
 
-
 const productsRouter = require("./routes/products");
 const ordersRouter = require("./routes/orders");
 const usersRouter = require("./routes/users");
