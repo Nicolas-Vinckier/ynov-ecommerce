@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="69" failures="0" errors="0" time="2.952">
+  <testsuite name="GET /api/orders" errors="0" failures="0" skipped="0" timestamp="2026-05-26T10:53:56" time="1.448" tests="16">
+    <testcase classname="GET /api/orders returns all orders, each with productIds" name="GET /api/orders returns all orders, each with productIds" time="0.041">
+    </testcase>
+    <testcase classname="GET /api/orders returns an empty array when no orders exist" name="GET /api/orders returns an empty array when no orders exist" time="0.022">
+    </testcase>
+    <testcase classname="GET /api/orders/:id returns the order with its productIds" name="GET /api/orders/:id returns the order with its productIds" time="0.019">
+    </testcase>
+    <testcase classname="GET /api/orders/:id returns 404 when the order does not exist" name="GET /api/orders/:id returns 404 when the order does not exist" time="0.016">
+    </testcase>
+    <testcase classname="POST /api/orders creates an order and returns 201 with productIds" name="POST /api/orders creates an order and returns 201 with productIds" time="0.026">
+    </testcase>
+    <testcase classname="POST /api/orders computes total from product prices" name="POST /api/orders computes total from product prices" time="0.008">
+    </testcase>
+    <testcase classname="POST /api/orders returns 400 when userId is missing" name="POST /api/orders returns 400 when userId is missing" time="0.006">
+    </testcase>
+    <testcase classname="POST /api/orders returns 400 when productIds is missing" name="POST /api/orders returns 400 when productIds is missing" time="0.007">
+    </testcase>
+    <testcase classname="POST /api/orders returns 400 when productIds is not an array" name="POST /api/orders returns 400 when productIds is not an array" time="0.008">
+    </testcase>
+    <testcase classname="PATCH /api/orders/:id/status updates the status and returns the updated order" name="PATCH /api/orders/:id/status updates the status and returns the updated order" time="0.038">
+    </testcase>
+    <testcase classname="PATCH /api/orders/:id/status accepts valid status &quot;pending&quot;" name="PATCH /api/orders/:id/status accepts valid status &quot;pending&quot;" time="0.021">
+    </testcase>
+    <testcase classname="PATCH /api/orders/:id/status accepts valid status &quot;shipped&quot;" name="PATCH /api/orders/:id/status accepts valid status &quot;shipped&quot;" time="0.005">
+    </testcase>
+    <testcase classname="PATCH /api/orders/:id/status accepts valid status &quot;delivered&quot;" name="PATCH /api/orders/:id/status accepts valid status &quot;delivered&quot;" time="0.006">
+    </testcase>
+    <testcase classname="PATCH /api/orders/:id/status accepts valid status &quot;cancelled&quot;" name="PATCH /api/orders/:id/status accepts valid status &quot;cancelled&quot;" time="0.006">
+    </testcase>
+    <testcase classname="PATCH /api/orders/:id/status returns 400 for an invalid status value" name="PATCH /api/orders/:id/status returns 400 for an invalid status value" time="0.021">
+    </testcase>
+    <testcase classname="PATCH /api/orders/:id/status returns 404 when the order does not exist" name="PATCH /api/orders/:id/status returns 404 when the order does not exist" time="0.024">
+    </testcase>
+  </testsuite>
+  <testsuite name="GET /api/orders" errors="0" failures="0" skipped="0" timestamp="2026-05-26T10:53:57" time="0.394" tests="12">
+    <testcase classname="GET /api/orders empty list — returns an empty array" name="GET /api/orders empty list — returns an empty array" time="0.044">
+    </testcase>
+    <testcase classname="GET /api/orders list with data — returns all orders with their productIds" name="GET /api/orders list with data — returns all orders with their productIds" time="0.036">
+    </testcase>
+    <testcase classname="GET /api/orders/:id existing order — returns the order with its productIds" name="GET /api/orders/:id existing order — returns the order with its productIds" time="0.01">
+    </testcase>
+    <testcase classname="GET /api/orders/:id non-existent order — returns 404" name="GET /api/orders/:id non-existent order — returns 404" time="0.006">
+    </testcase>
+    <testcase classname="POST /api/orders valid payload — creates order, computes total, returns 201" name="POST /api/orders valid payload — creates order, computes total, returns 201" time="0.006">
+    </testcase>
+    <testcase classname="POST /api/orders missing userId — returns 400" name="POST /api/orders missing userId — returns 400" time="0.006">
+    </testcase>
+    <testcase classname="POST /api/orders missing productIds — returns 400" name="POST /api/orders missing productIds — returns 400" time="0.006">
+    </testcase>
+    <testcase classname="POST /api/orders productIds not an array — returns 400" name="POST /api/orders productIds not an array — returns 400" time="0.005">
+    </testcase>
+    <testcase classname="PATCH /api/orders/:id/status valid status — updates and returns the order" name="PATCH /api/orders/:id/status valid status — updates and returns the order" time="0.011">
+    </testcase>
+    <testcase classname="PATCH /api/orders/:id/status invalid status value — returns 400" name="PATCH /api/orders/:id/status invalid status value — returns 400" time="0.012">
+    </testcase>
+    <testcase classname="PATCH /api/orders/:id/status non-existent order — returns 404" name="PATCH /api/orders/:id/status non-existent order — returns 404" time="0.005">
+    </testcase>
+    <testcase classname="PATCH /api/orders/:id/status all valid statuses are accepted" name="PATCH /api/orders/:id/status all valid statuses are accepted" time="0.042">
+    </testcase>
+  </testsuite>
+  <testsuite name="GET /api/products" errors="0" failures="0" skipped="0" timestamp="2026-05-26T10:53:58" time="0.198" tests="10">
+    <testcase classname="GET /api/products returns all products from the db" name="GET /api/products returns all products from the db" time="0.007">
+    </testcase>
+    <testcase classname="GET /api/products passes category to the query when ?category is provided" name="GET /api/products passes category to the query when ?category is provided" time="0.007">
+    </testcase>
+    <testcase classname="GET /api/products returns an empty array when the db returns no rows" name="GET /api/products returns an empty array when the db returns no rows" time="0.006">
+    </testcase>
+    <testcase classname="GET /api/products/:id returns the product when found" name="GET /api/products/:id returns the product when found" time="0.005">
+    </testcase>
+    <testcase classname="GET /api/products/:id returns 404 when the product does not exist" name="GET /api/products/:id returns 404 when the product does not exist" time="0.005">
+    </testcase>
+    <testcase classname="GET /api/products/:id returns 400 for a non-numeric id" name="GET /api/products/:id returns 400 for a non-numeric id" time="0.005">
+    </testcase>
+    <testcase classname="POST /api/products creates a product and returns 201 with the new product" name="POST /api/products creates a product and returns 201 with the new product" time="0.009">
+    </testcase>
+    <testcase classname="POST /api/products defaults stock to 0 and category to &quot;misc&quot; when omitted" name="POST /api/products defaults stock to 0 and category to &quot;misc&quot; when omitted" time="0.006">
+    </testcase>
+    <testcase classname="POST /api/products returns 400 when name is missing" name="POST /api/products returns 400 when name is missing" time="0.005">
+    </testcase>
+    <testcase classname="POST /api/products returns 400 when price is missing" name="POST /api/products returns 400 when price is missing" time="0.01">
+    </testcase>
+  </testsuite>
+  <testsuite name="GET /api/products" errors="0" failures="0" skipped="0" timestamp="2026-05-26T10:53:58" time="0.172" tests="7">
+    <testcase classname="GET /api/products empty list — returns an empty array" name="GET /api/products empty list — returns an empty array" time="0.007">
+    </testcase>
+    <testcase classname="GET /api/products list with data — returns all products" name="GET /api/products list with data — returns all products" time="0.006">
+    </testcase>
+    <testcase classname="GET /api/products filter by category — returns only matching products" name="GET /api/products filter by category — returns only matching products" time="0.005">
+    </testcase>
+    <testcase classname="GET /api/products filter by unknown category — returns an empty array" name="GET /api/products filter by unknown category — returns an empty array" time="0.006">
+    </testcase>
+    <testcase classname="GET /api/products/:id non-existent product — returns 404" name="GET /api/products/:id non-existent product — returns 404" time="0.005">
+    </testcase>
+    <testcase classname="GET /api/products/:id invalid id (non-numeric) — returns 400" name="GET /api/products/:id invalid id (non-numeric) — returns 400" time="0.004">
+    </testcase>
+    <testcase classname="GET /api/products/:id existing product — returns the correct product" name="GET /api/products/:id existing product — returns the correct product" time="0.007">
+    </testcase>
+  </testsuite>
+  <testsuite name="formatV2" errors="0" failures="0" skipped="0" timestamp="2026-05-26T10:53:58" time="0.062" tests="5">
+    <testcase classname="formatV2 preserves all original product fields" name="formatV2 preserves all original product fields" time="0.001">
+    </testcase>
+    <testcase classname="formatV2 available is true when stock &gt; 0" name="formatV2 available is true when stock &gt; 0" time="0.001">
+    </testcase>
+    <testcase classname="formatV2 available is false when stock is 0" name="formatV2 available is false when stock is 0" time="0">
+    </testcase>
+    <testcase classname="formatV2 priceFormatted uses euro symbol and 2 decimal places" name="formatV2 priceFormatted uses euro symbol and 2 decimal places" time="0">
+    </testcase>
+    <testcase classname="formatV2 does not mutate the original product object" name="formatV2 does not mutate the original product object" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="Série de tests pour les utilisateurs" errors="0" failures="0" skipped="0" timestamp="2026-05-26T10:53:58" time="0.155" tests="2">
+    <testcase classname="Série de tests pour les utilisateurs devrait récupérer l&apos;utilisateur avec l&apos;id 1" name="Série de tests pour les utilisateurs devrait récupérer l&apos;utilisateur avec l&apos;id 1" time="0.006">
+    </testcase>
+    <testcase classname="Série de tests pour les utilisateurs devrait échouer car on attend 200 pour un utilisateur inexistant" name="Série de tests pour les utilisateurs devrait échouer car on attend 200 pour un utilisateur inexistant" time="0.005">
+    </testcase>
+  </testsuite>
+  <testsuite name="GET /api/users" errors="0" failures="0" skipped="0" timestamp="2026-05-26T10:53:58" time="0.176" tests="8">
+    <testcase classname="GET /api/users empty list — returns an empty array" name="GET /api/users empty list — returns an empty array" time="0.007">
+    </testcase>
+    <testcase classname="GET /api/users list with data — returns all users" name="GET /api/users list with data — returns all users" time="0.006">
+    </testcase>
+    <testcase classname="GET /api/users/:id existing user — returns the correct user" name="GET /api/users/:id existing user — returns the correct user" time="0.006">
+    </testcase>
+    <testcase classname="GET /api/users/:id non-existent user — returns 404" name="GET /api/users/:id non-existent user — returns 404" time="0.005">
+    </testcase>
+    <testcase classname="POST /api/users valid payload — creates user and returns 201" name="POST /api/users valid payload — creates user and returns 201" time="0.009">
+    </testcase>
+    <testcase classname="POST /api/users missing name — returns 400" name="POST /api/users missing name — returns 400" time="0.005">
+    </testcase>
+    <testcase classname="POST /api/users missing email — returns 400" name="POST /api/users missing email — returns 400" time="0.006">
+    </testcase>
+    <testcase classname="POST /api/users duplicate email — returns 409" name="POST /api/users duplicate email — returns 409" time="0.006">
+    </testcase>
+  </testsuite>
+  <testsuite name="GET /api/users" errors="0" failures="0" skipped="0" timestamp="2026-05-26T10:53:59" time="0.197" tests="9">
+    <testcase classname="GET /api/users returns all users from the db" name="GET /api/users returns all users from the db" time="0.01">
+    </testcase>
+    <testcase classname="GET /api/users returns an empty array when no users exist" name="GET /api/users returns an empty array when no users exist" time="0.006">
+    </testcase>
+    <testcase classname="GET /api/users/:id returns the user when found" name="GET /api/users/:id returns the user when found" time="0.005">
+    </testcase>
+    <testcase classname="GET /api/users/:id returns 404 when the user does not exist" name="GET /api/users/:id returns 404 when the user does not exist" time="0.006">
+    </testcase>
+    <testcase classname="POST /api/users creates a user and returns 201" name="POST /api/users creates a user and returns 201" time="0.01">
+    </testcase>
+    <testcase classname="POST /api/users assigns &quot;customer&quot; role by default" name="POST /api/users assigns &quot;customer&quot; role by default" time="0.008">
+    </testcase>
+    <testcase classname="POST /api/users returns 400 when name is missing" name="POST /api/users returns 400 when name is missing" time="0.009">
+    </testcase>
+    <testcase classname="POST /api/users returns 400 when email is missing" name="POST /api/users returns 400 when email is missing" time="0.008">
+    </testcase>
+    <testcase classname="POST /api/users returns 409 when email is already taken (UNIQUE constraint)" name="POST /api/users returns 409 when email is already taken (UNIQUE constraint)" time="0.009">
+    </testcase>
+  </testsuite>
+</testsuites>
