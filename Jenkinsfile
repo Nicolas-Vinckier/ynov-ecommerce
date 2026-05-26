@@ -13,7 +13,6 @@ node {
         '''
     }
 
-    // On crée une variable courte pour appeler notre binaire Docker partout
     def dockerCmd = "${workspace}/docker"
 
     stage('Parallel Node Tests') {
@@ -23,9 +22,9 @@ node {
         services.each { svc ->
             parallelStages[svc] = {
                 stage("Test ${svc}") {
-                    // On lance manuellement un conteneur Node éphémère pour chaque service
-                    // -v $(pwd):/app monte le dossier du service actuel dans le conteneur
-                    sh "${dockerCmd} run --rm -v \$(pwd)/${svc}:/app -w /app node:20-alpine sh -c 'npm install && npm test'"
+                    // Au lieu de monter un volume -v, on utilise l'option -v du socket de données 
+                    // ou plus simple : on demande à docker de mapper directement le volume nommé global de Jenkins
+                    sh "${dockerCmd} run --rm --volumes-from \$(hostname) -w ${workspace}/${svc} node:20-alpine sh -c 'npm install && npm test'"
                 }
             }
         }
