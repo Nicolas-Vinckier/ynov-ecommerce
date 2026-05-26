@@ -1,4 +1,4 @@
-node('docker') {
+node {
   def services = ['api', 'worker', 'admin']
 
   stage('Checkout') { checkout scm }
