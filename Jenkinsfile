@@ -3,29 +3,29 @@ node {
         checkout scm 
     }
 
-    // On force l'exécution des tests à l'intérieur d'un conteneur Node officiel
-    docker.image('node:20-alpine').inside {
-        def services = ['api', 'worker', 'admin']
-
-        // Boucle dynamique en parallèle
-        def parallelStages = [:]
-        services.each { svc ->
-            parallelStages[svc] = {
-                stage("Test ${svc}") {
-                    dir(svc) {
-                        sh 'npm ci && npm test'
+    // On récupère le chemin de l'outil Docker configuré dans Jenkins
+    def dockerHome = tool name: 'latest', type: 'hudson.plugins.docker.commons.tools.DockerToolInstaller'
+    
+    // On l'injecte dans le PATH pour ce bloc d'exécution
+    withEnv(["PATH=${dockerHome}/bin:${env.PATH}"]) {
+        
+        stage('Pull Image') {
+            // Le plugin va maintenant trouver le binaire et utiliser ton socket Windows
+            docker.image('node:20-alpine').inside {
+                def services = ['api', 'worker', 'admin']
+                def parallelStages = [:]
+                
+                services.each { svc ->
+                    parallelStages[svc] = {
+                        stage("Test ${svc}") {
+                            dir(svc) {
+                                sh 'npm ci && npm test'
+                            }
+                        }
                     }
                 }
+                parallel parallelStages
             }
-        }
-        parallel parallelStages
-    }
-
-    // Logique conditionnelle hors du conteneur Node
-    if (env.BRANCH_NAME == 'main' && currentBuild.changeSets.size() > 0) {
-        stage('Release') {
-            def version = sh(returnStdout: true, script: 'git describe --tags').trim()
-            sh "./release.sh ${version}"
         }
     }
 }
