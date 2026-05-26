@@ -1,5 +1,5 @@
 pipeline {
-  agent { docker { image 'node:20-alpine' } }
+  agent any
 
   environment {
     NODE_ENV = 'test'
