@@ -25,7 +25,7 @@ node {
                 stage("Test ${svc}") {
                     // On lance manuellement un conteneur Node éphémère pour chaque service
                     // -v $(pwd):/app monte le dossier du service actuel dans le conteneur
-                    sh "${dockerCmd} run --rm -v \$(pwd)/${svc}:/app -w /app node:20-alpine sh -c 'npm ci && npm test'"
+                    sh "${dockerCmd} run --rm -v \$(pwd)/${svc}:/app -w /app node:20-alpine sh -c 'npm install && npm test'"
                 }
             }
         }
