@@ -3,14 +3,24 @@ node {
         checkout scm 
     }
 
-    // On récupère le chemin de l'outil Docker configuré dans Jenkins
-    def dockerHome = tool name: 'latest', type: 'hudson.plugins.docker.commons.tools.DockerToolInstaller'
-    
-    // On l'injecte dans le PATH pour ce bloc d'exécution
-    withEnv(["PATH=${dockerHome}/bin:${env.PATH}"]) {
+    stage('Setup Docker Client') {
+        // On télécharge directement le binaire client Docker Linux (tgz) officiel
+        // pour que Jenkins puisse l'exécuter depuis son conteneur
+        sh '''
+            if [ ! -f ./docker/docker ]; then
+                curl -fsSL https://download.docker.com/linux/static/stable/x86_64/docker-24.0.7.tgz -o docker.tgz
+                tar -xzvf docker.tgz
+                rm docker.tgz
+            fi
+        '''
+    }
+
+    // On injecte le dossier du binaire téléchargé directement dans le PATH
+    def dockerBinPath = "${workspace}/docker"
+    withEnv(["PATH=${dockerBinPath}:${env.PATH}"]) {
         
-        stage('Pull Image') {
-            // Le plugin va maintenant trouver le binaire et utiliser ton socket Windows
+        stage('Docker Pull & Test') {
+            // Maintenant, le binaire est trouvé dans le workspace et va utiliser ton socket Windows
             docker.image('node:20-alpine').inside {
                 def services = ['api', 'worker', 'admin']
                 def parallelStages = [:]
