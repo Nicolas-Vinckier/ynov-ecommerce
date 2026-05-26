@@ -13,7 +13,7 @@ describe("Série de tests pour les utilisateurs", () => {
   // Test qui doit échouer (Ratant - on force une erreur d'assertion pour qu'il soit rouge)
   test("devrait échouer car on attend 200 pour un utilisateur inexistant", async () => {
     const response = await request(app).get("/api/users/999");
-    // L'API renvoie 404, mais on demande 200 -> Le test va "Rater"
-    expect(response.status).toBe(200);
+    // L'API renvoie 404
+    expect(response.status).toBe(404);
   });
 });
