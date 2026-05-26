@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const users = require("../data/users");
+const db = require("../db");
 
 const FEATURE_V2_USERS = process.env.FEATURE_V2_USERS === "true";
 
